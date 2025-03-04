@@ -11,7 +11,7 @@ app.get("/", async (req, res) => {
         const cacheValue = await client.get(`weather:city:${process.env.DEFAULT_CITY}`);
         if(cacheValue) return res.send(JSON.parse(cacheValue));
         const result = await fetch(
-            `http://api.weatherapi.com/v1/forecast.json?key=${process.env.API_KEY}&q=${process.env.DEFAULT_CITY}&days=${process.env.DEFAULT_DAYS}`
+            `${process.env.WEATHER_BASE_URL}/forecast.json?key=${process.env.API_KEY}&q=${process.env.DEFAULT_CITY}&days=${process.env.DEFAULT_DAYS}`
           );
         const data = await result.json();
         await client.set(`weather:city:${process.env.DEFAULT_CITY}`, JSON.stringify(data))
@@ -29,7 +29,7 @@ app.get("/search/:searchString", async (req,res) =>{
         const cacheValue = await client.get(`weather:search:${searchString}`);
         if(cacheValue) return res.send(JSON.parse(cacheValue));
         const result = await fetch(
-            `http://api.weatherapi.com/v1/search.json?key=${process.env.API_KEY}&q=${searchString}`
+            `${process.env.WEATHER_BASE_URL}/search.json?key=${process.env.API_KEY}&q=${searchString}`
           );
         const data = await result.json();
         await client.set(`weather:search:${searchString}`, JSON.stringify(data))
@@ -46,7 +46,7 @@ app.get("/weatherForecast/:city/:days", async (req, res) =>{
         const cacheValue = await client.get(`weather:city:${city}`);
         if(cacheValue) return res.send(JSON.parse(cacheValue));
         const result = await fetch(
-            `http://api.weatherapi.com/v1/forecast.json?key=${process.env.API_KEY}&q=${city}&days=${days}`
+            `${process.env.WEATHER_BASE_URL}/forecast.json?key=${process.env.API_KEY}&q=${city}&days=${days}`
           );
           const data = await result.json();
           await client.set(`weather:city:${city}`, JSON.stringify(data))
