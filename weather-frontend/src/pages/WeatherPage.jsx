@@ -23,7 +23,7 @@ const WeatherPage = () => {
     if (city !== "") {
       try {
         const response = await fetch(
-          `http://localhost:3000/weatherForecast/${city}/10`
+          `https://weather-app-backend-t3uy.onrender.com/weatherForecast/${city}/10`
         );
         const data = await response.json();
         setWeatherData(data);
@@ -34,7 +34,7 @@ const WeatherPage = () => {
   };
 
   const getDefaultData = async () => {
-    const response = await fetch(`http://localhost:3000/`);
+    const response = await fetch(`https://weather-app-backend-t3uy.onrender.com/`);
     const data = await response.json();
     setWeatherData(data);
   };
