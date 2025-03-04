@@ -13,7 +13,7 @@ const Navbar = ({ setSearchedCity }) => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:3000/search/${searchString}`);
+      const response = await fetch(`https://weather-app-backend-t3uy.onrender.com/search/${searchString}`);
       const data = await response.json();
       setLocationData(data);
     } catch (error) {
